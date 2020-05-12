@@ -79,14 +79,18 @@ module.exports = class normalization {
                 break;
             case 'Ranges':
                 var label;
+                var numPayload = parseFloat(payload);
                 for (index in this._content) {
                     var range = this._content[index];
+                    var rangeFrom = parseFloat(range.from);
+
                     console.log('Current range:\t', range);
-                    if (payload >= range.from) {
-                        console.log(payload, 'higher or equal to', range.from);
+                    if (numPayload >= rangeFrom) {
+                        console.log(numPayload, 'higher or equal to', rangeFrom);
                         if (range.to) {
-                            if (payload < range.to) {
-                                console.log(payload, 'smaller to', range.to);
+                            var rangeTo = parseFloat(range.to);
+                            if (numPayload < rangeTo) {
+                                console.log(numPayload, 'smaller to', rangeTo);
                                 if (range.label) {
                                     return range.label;
                                 } else {
