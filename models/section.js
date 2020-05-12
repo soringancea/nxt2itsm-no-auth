@@ -1,3 +1,5 @@
+const hasContent = require('../utils/utils').hasContent;
+
 module.exports = class section {
     constructor(jsonSection) {
         this._title = this.getTitle(jsonSection.elements);
@@ -13,7 +15,7 @@ module.exports = class section {
     };
 
     getTitle(arrayJson) {
-        if (arrayJson[0].name === 'Title') {
+        if (arrayJson[0].name === 'Title' && hasContent(arrayJson[0].elements[0])) {
             return arrayJson[0].elements[0].text;
         } else {
             return '';
@@ -23,7 +25,7 @@ module.exports = class section {
     parseContent(arrayJson) {
         var elements = [];
         for (index in arrayJson) {
-            if (arrayJson[index].name === 'Description') {
+            if (arrayJson[index].name === 'Description' && hasContent(arrayJson[index].elements[0])) {
                 var element = {
                     type: 'Description',
                     content: arrayJson[index].elements[0].text

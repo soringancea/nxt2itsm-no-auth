@@ -24,7 +24,7 @@ module.exports = class document {
     };
 
     getHeader(arrayJson) {
-        if (arrayJson[0].name === 'Header') {
+        if (arrayJson[0].name === 'Header' && utils.hasContent(arrayJson[0].elements[0])) {
             return arrayJson[0].elements[0].text;
         } else {
             return '';

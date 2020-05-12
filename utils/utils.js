@@ -2,6 +2,14 @@ const path = require('path');
 
 exports.rootDir = path.dirname(process.mainModule.filename);
 
+exports.hasContent = (element) => {
+    if (element.text) {
+        return true;
+    } else {
+        return false;
+    };
+};
+
 // Function that will convert a value depending on the format
 exports.transform = (payload, format) => {
     console.log('CONVERTING:\t', payload, 'using format:', format);
