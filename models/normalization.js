@@ -58,6 +58,7 @@ module.exports = class normalization {
     };
 
     applyNorm(payload) {
+        console.log('Applying normalization to:\t', payload);
         switch (this._type) {
             case 'Enums':
                 for (index in this._content) {
@@ -80,10 +81,12 @@ module.exports = class normalization {
                 var label;
                 for (index in this._content) {
                     var range = this._content[index];
-
+                    console.log('Current range:\t', range);
                     if (payload >= range.from) {
+                        console.log(payload, 'higher or equal to', range.from);
                         if (range.to) {
                             if (payload < range.to) {
+                                console.log(payload, 'smaller to', range.to);
                                 if (range.label) {
                                     return range.label;
                                 } else {
@@ -91,13 +94,16 @@ module.exports = class normalization {
                                 };
                             };
                         } else {
+                            console.log('no \'to\' value')
                             if (range.label) {
+                                console.log('label found:', range.label);
                                 label = range.label;
                             };
                         };
                     };
                 };
                 if (label) {
+                    console.log('returning label:', label);
                     return label;
                 };
                 break;

@@ -123,7 +123,7 @@ exports.parseResults = (jsonResults, scores, normObject, propObject) => {
         var value = pair[1];
         var isPayload = key.includes('payload');
         var isScore = key.includes('score');
-
+        console.log('PARSING:\t[', key, ',', value, ']');
         if (isScore) {
             var scoreName = key.substring(
                 key.indexOf(":") + 1,
@@ -131,10 +131,8 @@ exports.parseResults = (jsonResults, scores, normObject, propObject) => {
             );
             if (hasValue(value) && isPayload) {
                 parsedResults[key] = normObject[key].applyNorm(value);
-                console.log('CONVERTED:\t', value, '\tto:', parsedResults[key]);
             } else if (isPayload) {
                 parsedResults[key] = '-';
-                console.log('CONVERTED:\t', value, '\tto:', parsedResults[key]);
             } else if (hasValue(value) && Number.isInteger(+value)) {
                 var numValue = +value;
                 parsedResults[key] = [numValue, scores[scoreName].calcColor(value)];
@@ -146,10 +144,10 @@ exports.parseResults = (jsonResults, scores, normObject, propObject) => {
             };
         } else {
             parsedResults[key] = utils.transform(value, propObject[key][1]);
-            console.log('CONVERTED:\t', value, '\tto:', parsedResults[key]);
         };
-
+        console.log('PARSED:\t[', key, ',', parsedResults[key], ']');
     });
+
     return parsedResults;
 };
 
