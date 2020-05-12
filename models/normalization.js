@@ -83,16 +83,17 @@ module.exports = class normalization {
 
                     if (payload >= range.from) {
                         if (range.to) {
-                            if (payload <= range.to) {
+                            if (payload < range.to) {
                                 if (range.label) {
                                     return range.label;
                                 } else {
                                     return utils.transform(payload, this._format);
                                 };
                             };
-                        };
-                        if (range.label) {
-                            label = range.label;
+                        } else {
+                            if (range.label) {
+                                label = range.label;
+                            };
                         };
                     };
                 };
