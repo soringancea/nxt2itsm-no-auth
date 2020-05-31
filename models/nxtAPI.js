@@ -156,6 +156,7 @@ GetHttps = (host, port, url) => {
         baseURL: 'https://'.concat(host, ':', port),
         method: 'get',
         url: url,
+        httpsAgent: httpsAgent,
         auth: {
             username: config.api.username,
             password: config.api.password
