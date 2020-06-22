@@ -58,6 +58,18 @@ sudo systemctl stop firewalld
 ```
 ### Online installation
 
+__Note:__ If the Appliance is behind a proxy, you might need to configure it both as environment variables as well as specifically for npm installations.
+To do so, run the following commands:
+ ```
+export HTTP_PROXY=user:pass@host:port
+export HTTPS_PROXY=user:pass@host:port
+
+npm config set proxy http://username:password@host:port
+npm config set https-proxy http://username:password@host:port
+ ```
+Adapt the commands based on your own proxy configuration.
+
+
 This guide admit that the installation from the /home/nexthink folder. If you are not in this folfder, move in it with the following command:
 ```
 cd /home/nexthink/
@@ -69,7 +81,7 @@ sudo yum install git -y
 Install pm2 and also download the different files from the git repository:
 ```
 sudo npm -g install pm2
-npm install jeromewyss/nxt2itsm-no-auth
+npm install https://github.com/jeromewyss/nxt2itsm-no-auth
 ```
 Make sure pm2 will autostart after a reboot and start it now:
 ```
