@@ -182,18 +182,23 @@ getDevicesNXQL = (engine) => {
     return GetHttps(engine.address, config.api.nxqlPort, url);
 };
 
-parseDevices = async (promises) => {
+parseDevices = async (promises, engines) => {
     var devices = {};
     await axios.all(promises)
         .then(axios.spread((...responses) => {
             for (index in responses) {
                 var host = url.parse(responses[index].config.baseURL).hostname;
+                for (engine of engines) {
+                    if (engine.address.toUpperCase() == host.toUpperCase()) {
+                        var deviceEngine = engine;
+                    }
+                };
                 console.log('Status code:', responses[index].status);
                 if (responses[index].status == '200') {
                     var jsonContent = responses[index].data;
                     for (device in jsonContent) {
                         var name = jsonContent[device].name.toLowerCase();
-                        devices[name] = host;
+                        devices[name] = deviceEngine;
                     };
                     console.log('Parsing of devices for Engine:', host, 'done');
                 } else if (responses[index].status == '400') {

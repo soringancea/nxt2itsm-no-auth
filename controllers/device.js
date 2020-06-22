@@ -66,14 +66,14 @@ exports.getDevice = async (req, res) => {
         fields.push(scoresContent[key].selectString);
         Object.assign(normalizations, scoresContent[key].normalizations);
     });
-    await nxtAPI.runNXQL(deviceName, fields.join(' '), engine)
+    await nxtAPI.runNXQL(deviceName, fields.join(' '), engine.address)
         .then((response) => {
             console.log('NXQL query results:');
             console.table(response.data[0]);
             var parsed = nxtAPI.parseResults(response.data[0], scoresContent, normalizations, properties);
             res.render('device', {
                 deviceName: deviceName,
-                engine: engine,
+                engine: engine.name,
                 scores: scoresContent,
                 config: config,
                 properties: properties,
@@ -94,14 +94,14 @@ exports.getScore = async (req, res) => {
     var fields = [];
     var normalizations = scoresContent[scoreName].normalizations;
     fields.push(scoresContent[scoreName].selectString);
-    await nxtAPI.runNXQL(deviceName, fields.join(' '), engine)
+    await nxtAPI.runNXQL(deviceName, fields.join(' '), engine.address)
         .then((response) => {
             console.log('NXQL query results:');
             console.table(response.data[0]);
             var parsed = nxtAPI.parseResults(response.data[0], scoresContent, normalizations, properties);
             res.render('device', {
                 deviceName: deviceName,
-                engine: engine,
+                engine: engine.name,
                 scores: [scoresContent[scoreName]],
                 config: config,
                 properties: properties,
