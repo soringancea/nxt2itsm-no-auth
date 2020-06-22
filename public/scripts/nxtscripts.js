@@ -1,9 +1,27 @@
 $(document).ready(function () {
 
     //When page is loading
-    $("[name='menu__Properties']").addClass('selectedmenu');
-    $('.content').hide();
-    $("[name='content__Properties']").show();
+    if (window.location.href.indexOf('score') > 0) {
+        var menu_name = $.trim($('.scoreitem').last().attr('name'));
+        var content_name = menu_name.replace('menu__', 'content__');
+        var doc_name = menu_name.replace('menu__', 'doc__');
+
+        $('.content').hide();
+        $('.docpane').hide();
+        $(`[name='${content_name}']`).show();
+        if ($(`[name='${doc_name}']`).length) {
+            $(`[name='${content_name}']`).find('.docpane').show();
+            height_score = $(`[name='${content_name}']`).find('.scorepane').height();
+            $(`[name='${content_name}']`).find('.docpane').height(height_score);
+            $(`[name='${content_name}']`).find('.docpane').find('.docsection').hide();
+            $(`[name='${doc_name}']`).show();
+        };
+    } else {
+        $("[name='menu__Properties']").addClass('selectedmenu');
+        $('.content').hide();
+        $("[name='content__Properties']").show();
+    }
+
 
     //On score click, show the associated doc and highlight the line
     $(".canSelect[name^='score__']").click(function (event) {
