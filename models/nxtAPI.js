@@ -38,6 +38,8 @@ exports.convertedProp = () => {
             convertedProp[key] = value;
         };
     });
+    console.log('Removed # and \'\' from dynamic fields key');
+    console.table(convertedProp);
     return convertedProp;
 };
 
