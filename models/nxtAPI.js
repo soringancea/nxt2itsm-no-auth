@@ -10,8 +10,7 @@ const https = require('https');
 
 var httpsAgent;
 if (config.ssl.caBundleName) {
-    const caBundle = path.join(utils.rootDir, 'ssl', config.ssl.caBundleName);
-    httpsAgent = new https.Agent({ ca: fs.readFileSync(caBundle) });
+    httpsAgent = new https.Agent({ ca: config.ssl.caContent });
 } else {
     httpsAgent = new https.Agent({ rejectUnauthorized: false });
 };
