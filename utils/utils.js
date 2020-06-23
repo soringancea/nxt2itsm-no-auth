@@ -13,6 +13,9 @@ exports.hasContent = (element) => {
 // Function that will convert a value depending on the format
 exports.transform = (payload, format) => {
     console.log('CONVERTING:\t', payload, 'using format:', format);
+    if (payload == null) {
+        return " - ";
+    }
     var strreturn = payload;
     if (format === 'datetime') {
         return payload.replace('T', ' @ ');
