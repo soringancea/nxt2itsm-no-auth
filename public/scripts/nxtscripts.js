@@ -9,6 +9,7 @@ $(document).ready(function () {
         $('.content').hide();
         $('.docpane').hide();
         $(`[name='${content_name}']`).show();
+        $(`[name='${menu_name}']`).addClass('selectedmenu');
         if ($(`[name='${doc_name}']`).length) {
             $(`[name='${content_name}']`).find('.docpane').show();
             height_score = $(`[name='${content_name}']`).find('.scorepane').height();
