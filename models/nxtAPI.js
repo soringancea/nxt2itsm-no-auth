@@ -93,7 +93,7 @@ exports.getDevices = async () => {
             console.error('Error retrieving Engine:', error);
             return error;
         });
-    const allDevices = await parseDevices(promises);
+    const allDevices = await parseDevices(promises, engines);
     return allDevices;
 };
 
