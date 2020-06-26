@@ -54,6 +54,7 @@ exports.callActAPI = (remoteUid, deviceUid) => {
         method: 'post',
         url: '/api/remoteaction/v1/run',
         data: data,
+        httpsAgent: httpsAgent,
         headers: {
             'Content-type': 'application/json'
         },
